@@ -1,0 +1,136 @@
+/* Don't worry about this */
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+:root {
+	background-image: url("./background.png");
+		background-attachment: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+		font-size: 16px;
+		color: #222222;
+}
+
+body {
+	background-color: transparent;
+	width: min(850px, 90%);
+	margin: 0.5rem auto 2rem;
+}
+
+header#siteHeader {
+	background-color: #222222;
+	padding: 1.25rem 5%;
+	border-radius: 0.6rem 0.6rem 0 0;
+}
+header#siteHeader nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	column-gap: 2rem;
+}
+header#siteHeader a {
+	font-size: 1.3rem;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+header#siteHeader a:hover {
+	text-decoration: underline;
+}
+header#siteHeader img {
+	width: 1.5rem;
+}
+
+
+main {
+	background-color: #FFFFFF;
+	padding: 2rem 5%;
+	border: 1px solid #222222;
+}
+main h1 {
+	margin-bottom: 1.3rem;
+	font-size: 2rem;
+}
+main h2 {
+	margin: 1.2rem 0;
+	font-size: 1.5rem;
+}
+main p {
+	margin: 1rem 0;
+	line-height: 1.6rem;
+}
+main p.center {
+	text-align: center;
+}
+main a:hover {
+	background-color: #C9F1FE;
+}
+main img {
+	height: auto;
+	max-width: 100%;
+	margin: 1rem 0;
+}
+main address {
+	display: inline;
+	font-style: normal;
+}
+main iframe {
+	width: 100%;
+}
+main hr {
+	margin: 2.5rem 0;
+}
+
+main #postList {
+	margin-bottom: 1rem;
+}
+main #postList ul {
+	list-style: none;
+}
+main #postList li {
+	font-size: 1.2rem;
+	line-height: 1.9rem;
+}
+main #postList .moreposts {
+	margin-top: 0.2rem;
+	font-size: 0.8rem;
+}
+main #nextPrevLinks {
+	margin-top: 3rem;
+	text-align: center;
+}
+
+article #postHeader {
+	margin-bottom: 3rem;
+}
+article #postHeader #postTitle {
+	margin-bottom: 0.9rem;
+	font-size: 2rem;
+}
+article #postHeader #postDetails time,
+article #postHeader #postDetails address {
+	font-weight: bold;
+}
+article ul {
+	margin: 1rem 0;
+	padding-left: 2.5rem;
+}
+article li {
+	line-height: 1.6rem;
+}
+article figure {
+	margin: 2rem 0;
+}
+article blockquote {
+	margin: 1rem 2.5rem;
+}
+
+footer#siteFooter {
+	padding: 0.8rem 0;
+	font-size: 0.8rem;
+	color: #222222;
+}
+footer#siteFooter a:hover {
+	background-color: #C9F1FE;
+}

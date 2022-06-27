@@ -3,66 +3,77 @@ import re
 
 siteName = "Lily Lab"
 
-def listinputfiles() -> list:
-	"""Create a list of all the files in /_content and its immediate subdirectories."""
-	result = []
+def listcontent(contentDir: str = "content") -> list[dict]:
+	"""Creates a list of dicts, each referring to a file in the /content directory."""
 
-	for entry in os.listdir("content"):
+	def getcontentdata(contentPath: str) -> dict:
+		"""Create a dict containing information about a file in the /content directory."""
+
+		with open(f'{contentDir}/{contentPath}', encoding="utf8") as contentPage:
+			returnDict = {}
+
+			returnDict["path"] = contentPath
+			returnDict["title"] = re.search("(?<=: ).*", contentPage.readline()).group()
+			returnDict["date"] = re.search("(?<=: ).*", contentPage.readline()).group()
+			returnDict["author"] = re.search("(?<=: ).*", contentPage.readline()).group()
+			returnDict["tags"] = re.search("(?<=: ).*", contentPage.readline()).group()
+			contentPage.readline()
+			returnDict["main"] = contentPage.read()
+
+			return returnDict
+
+	returnList = []
+
+	for entry in os.listdir(contentDir):
 		if ".html" in entry:
-			result.append(entry)
+			returnList.append(getcontentdata(entry))
 		else:
-			for subentry in os.listdir(f"content/{entry}"):
-				result.append(f"{entry}/{subentry}")
+			for subEntry in os.listdir(f"{contentDir}/{entry}"):
+				returnList.append(getcontentdata(f"{entry}/{subEntry}"))
+	
+	return returnList
 
-	return result
+contentList = listcontent()
 
-def readpage(page) -> dict:
-	"""Create a dictionary containing the metadata and html of a file from the /input directory."""
+def definetemplates(templatesDir: str = "templates") -> dict:
+	"""Create a dict, with each entry referring to a file in the /templates directory."""
 
-	def getpagedata(pageline: str) -> str:
-		"""Interpret one of the first four lines in a file from the /input directory and return its appropriate data value."""
-		return re.search("(?<=: ).*", pageline).group()
+	returnDict = {}
 
-	pagedict = {
-		"title": getpagedata(page.readline()),
-		"date": getpagedata(page.readline()),
-		"author": getpagedata(page.readline()),
-		"tags": getpagedata(page.readline())
-	}
-	page.readline()
-	pagedict["html"] = page.read()
-	return pagedict
+	for entry in os.listdir(templatesDir):
+		with open(f'{templatesDir}/{entry}') as template:
+			returnDict[re.search(".*(?=\.)", entry).group()] = template.read()
+	
+	return returnDict
 
-# TODO: create a postheader.html so posts' headers are consistent
-# TODO: create a postfooter.html and figure out how to create the next/previous post links dynamically
-# TODO: maybe put all the templates in a single dictionary?
+templates = definetemplates()
 
-with (
-	open("templates/root.html", encoding="utf8") as rootTemplate,
-	open("templates/head.html", encoding="utf8") as headTemplate,
-	open("templates/siteheader.html", encoding="utf8") as siteHeaderTemplate,
-	open("templates/sitefooter.html", encoding="utf8") as siteFooterTemplate
-):
-	contentList = listinputfiles()
+for contentPage in contentList:
+	with open(f'_lilylab/{contentPage["path"]}', "w", encoding="utf8") as output:
+		root = templates["root"]
+		head = templates["head"]
+		siteHeader = templates["siteheader"]
+		siteFooter = templates["sitefooter"]
 
-	for listEntry in contentList:
-		with (
-			open(f"content/{listEntry}", encoding="utf8") as content,
-			open(f"_lilylab/{listEntry}", "w", encoding="utf8") as output
-		):
-			rootTemplate.seek(0)
-			headTemplate.seek(0)
-			siteHeaderTemplate.seek(0)
-			siteFooterTemplate.seek(0)
+		baseURL = "." if "posts/" not in contentPage["path"] else ".."
 
-			root = rootTemplate.read()
-			head = headTemplate.read()
-			siteHeader = siteHeaderTemplate.read()
-			siteFooter = siteFooterTemplate.read()
-			main = readpage(content)
+		head = head.format(
+			PAGE_TITLE=contentPage["title"],
+			SITE_NAME=siteName,
+			PAGE_AUTHOR=contentPage["author"],
+			BASE_URL=baseURL
+		)
+		root = root.format(
+			HEAD=head,
+			SITE_HEADER=siteHeader,
+			SITE_FOOTER=siteFooter,
+			MAIN=contentPage["main"]
+		)
 
-			baseURL = "." if "posts/" not in listEntry else ".."
+		output.write(root)
 
-			head = head.format(PAGE_TITLE=main["title"], SITE_NAME=siteName, PAGE_AUTHOR=main["author"], BASE_URL=baseURL)
-			root = root.format(HEAD=head, SITE_HEADER=siteHeader, SITE_FOOTER=siteFooter, MAIN=main["html"])
-			output.write(root)
+
+
+# # TODO: create a postheader.html so posts' headers are consistent
+# # TODO: create a postfooter.html and figure out how to create the next/previous post links dynamically
+# # TODO: maybe put all the templates in a single dictionary?

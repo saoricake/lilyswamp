@@ -1,3 +1,4 @@
+from datetime import date
 import os
 import re
 
@@ -54,8 +55,21 @@ for contentPage in contentList:
 		head = templates["head"]
 		siteHeader = templates["siteheader"]
 		siteFooter = templates["sitefooter"]
+		baseURL = "."
 
-		baseURL = "." if "posts/" not in contentPage["path"] else ".."
+		if "posts/" in contentPage["path"]:
+			postHeader = templates["postheader"]
+			baseURL = ".."
+
+			postHeader = postHeader.format(
+				PAGE_TITLE=contentPage["title"],
+				PAGE_DATE=contentPage["date"],
+				PAGE_DATE_STRING=date.fromisoformat(contentPage["date"]).strftime("%b %d, %Y"),
+				PAGE_AUTHOR=contentPage["author"]
+			)
+			contentPage["main"] = contentPage["main"].format(
+				POST_HEADER=postHeader
+			)
 
 		head = head.format(
 			PAGE_TITLE=contentPage["title"],
@@ -74,6 +88,4 @@ for contentPage in contentList:
 
 
 
-# # TODO: create a postheader.html so posts' headers are consistent
 # # TODO: create a postfooter.html and figure out how to create the next/previous post links dynamically
-# # TODO: maybe put all the templates in a single dictionary?

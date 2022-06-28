@@ -4,6 +4,19 @@ import re
 
 siteName = "Lily Lab"
 
+def definetemplates(templatesDir: str = "templates") -> dict:
+	"""Create a dict, with each entry referring to a file in the /templates directory."""
+
+	returnDict = {}
+
+	for entry in os.listdir(templatesDir):
+		with open(f'{templatesDir}/{entry}') as template:
+			returnDict[re.search(".*(?=\.)", entry).group()] = template.read()
+	
+	return returnDict
+
+templates = definetemplates()
+
 def listcontent(contentDir: str = "content") -> list[dict]:
 	"""Creates a list of dicts, each referring to a file in the /content directory."""
 
@@ -35,37 +48,26 @@ def listcontent(contentDir: str = "content") -> list[dict]:
 	return returnList
 
 contentList = listcontent()
+postList = [p for p in contentList if "posts/" in p["path"]]
+postList.reverse()
 
-def definetemplates(templatesDir: str = "templates") -> dict:
-	"""Create a dict, with each entry referring to a file in the /templates directory."""
+def createpostlisthtml(listlen: int = len(postList)) -> str:
+	htmlListItems = ""
 
-	returnDict = {}
-
-	for entry in os.listdir(templatesDir):
-		with open(f'{templatesDir}/{entry}') as template:
-			returnDict[re.search(".*(?=\.)", entry).group()] = template.read()
+	i = 0
+	while i <= listlen - 1:
+		if i <= len(postList) - 1:
+			htmlListItems += templates["postslist_item"].format(
+				POST_PATH=postList[i]["path"],
+				POST_DATE=postList[i]["date"],
+				POST_TITLE=postList[i]["title"]
+			)
+			i += 1
+		else:
+			htmlListItems += templates["postslist_more"]
+			break
 	
-	return returnDict
-
-templates = definetemplates()
-
-def createrecentpostslist():
-	postsList = [p for p in contentList if "posts/" in p["path"]]
-	postsList.reverse()
-
-	postsListHTML = templates["postslist"]
-	postsListItemsHTML = ""
-
-	for post in postsList:
-		postsListItemsHTML += templates["postslistitem"].format(
-			POST_PATH=post["path"],
-			POST_DATE=post["date"],
-			POST_TITLE=f"""{chr(187)} {post["title"]}"""
-		)
-	
-	return postsListHTML.format(POSTS_LIST_ITEMS=postsListItemsHTML)
-
-recentPostsList = createrecentpostslist()
+	return templates["postslist"].format(POST_LIST_ITEMS=htmlListItems)
 
 for contentPage in contentList:
 	with open(f'_lilylab/{contentPage["path"]}', "w", encoding="utf8") as output:
@@ -87,7 +89,7 @@ for contentPage in contentList:
 			)
 			contentPage["main"] = contentPage["main"].format(POST_HEADER=postHeader)
 
-		contentPage["main"] = contentPage["main"].format(POSTS_LIST=recentPostsList)
+		contentPage["main"] = contentPage["main"].format(POSTS_LIST=createpostlisthtml(5))
 		head = head.format(
 			PAGE_TITLE=contentPage["title"],
 			SITE_NAME=siteName,

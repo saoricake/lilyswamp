@@ -39,7 +39,7 @@ def listposts(postdir: str = "posts") -> list[dict]:
 posts = listposts()
 
 env.globals = {
-	"posts": posts
+	"POSTLIST": posts
 }
 
 for page in pages:

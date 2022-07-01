@@ -7,7 +7,7 @@
 		<nav id="postList">
 			<h1>Blog Posts</h1>
 			<ul>
-				{% for post in posts[:5] %}
+				{% for post in POSTLIST[:5] %}
 				<li>
 					<a href="posts/{{ post.path }}">
 						<time datetime="{{ post.date }}">{{ post.date }}</time> » {{ post.title }}

@@ -32,10 +32,15 @@ def listposts(postdir: str = "posts") -> list[dict]:
 			postdict["main"] = openpost.read()
 
 			returnlist.insert(0, postdict)
-	
+
+	returnlist.pop()
 	return returnlist
 
 posts = listposts()
+
+env.globals = {
+	"posts": posts
+}
 
 for page in pages:
 	with open(f"_lilylab/{page}", "w", encoding="utf8") as output:

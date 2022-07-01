@@ -2,6 +2,7 @@
 
 {% block pagetitle %}{{ post.title }}{% endblock %}
 {% block pageauthor %}{{ post.author }}{% endblock %}
+{% block pagedesc %}{{ "'" ~ post.title ~ "' by " ~ post.author ~ " on Lily Lab" }}{% endblock %}
 {% block baseurl %}..{% endblock %}
 
 {% block pagecontent %}

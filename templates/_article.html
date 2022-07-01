@@ -1,0 +1,20 @@
+{% extends "_root.html" %}
+
+{% block pagetitle %}{{ post.title }}{% endblock %}
+{% block pageauthor %}{{ post.author }}{% endblock %}
+{% block baseurl %}..{% endblock %}
+
+{% block pagecontent %}
+		<article>
+			<header id="postHeader">
+				<h1 id="postTitle">{{ post.title }}</h1>
+				<span id="postDetails">
+					posted on <time datetime="{{ post.date }}">{{ post.datestr }}</time> by <address>{{ post.author }}</address>
+				</span>
+			</header>
+
+{{ post.main }}
+		</article>
+
+		<nav id="nextPrevLinks"></nav>
+{% endblock %}

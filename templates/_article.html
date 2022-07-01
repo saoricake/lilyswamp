@@ -17,5 +17,13 @@
 {{ post.main }}
 		</article>
 
-		<nav id="nextPrevLinks"></nav>
+		<nav id="nextPrevLinks">
+			{% if post != POSTLIST|first %}
+			<a href="posts/{{ POSTLIST[POSTLIST.index(post) - 1].path }}">« Next Post</a> | 
+			{% endif %}
+			<a href="archive.html">Archive</a>
+			{% if post != POSTLIST|last %} 
+			| <a href="posts/{{ POSTLIST[POSTLIST.index(post) + 1].path }}">Prev Post »</a>
+			{% endif %}
+		</nav>
 {% endblock %}

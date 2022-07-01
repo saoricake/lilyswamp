@@ -49,7 +49,3 @@ for page in pages:
 for post in posts:
 	with open(f"_lilylab/posts/{post['path']}", "w", encoding="utf8") as output:
 		output.write(env.get_template("_article.html").render(post=post))
-
-
-
-# # TODO: create a postfooter.html and figure out how to create the next/previous post links dynamically

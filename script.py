@@ -47,5 +47,5 @@ for page in pages:
 		output.write(env.get_template(page).render())
 
 for post in posts:
-	with open(f"_lilylab/posts/{post['path']}", "w", encoding="utf8") as output:
+	with open(f"_lilylab/blog/{post['path']}", "w", encoding="utf8") as output:
 		output.write(env.get_template("_article.html").render(post=post))

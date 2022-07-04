@@ -22,14 +22,14 @@
 			<ul>
 				{% for post in POSTLIST[:5] %}
 				<li>
-					<a href="posts/{{ post.path }}">
+					<a href="blog/{{ post.path }}">
 						<time datetime="{{ post.date }}">{{ post.date }}</time> » {{ post.title }}
 					</a>
 				</li>
 				{% endfor %}
 				{% if POSTLIST|length > 5 %}
 				<li class="moreposts">
-					<a href="archive.html">» more posts</a>
+					<a href="blog">» more posts</a>
 				</li>
 				{% endif %}
 			</ul>

@@ -19,11 +19,11 @@
 
 		<nav id="nextPrevLinks">
 			{% if post != POSTLIST|first %}
-			<a href="posts/{{ POSTLIST[POSTLIST.index(post) - 1].path }}">« Next Post</a> | 
+			<a href="blog/{{ POSTLIST[POSTLIST.index(post) - 1].path }}">« Next Post</a> | 
 			{% endif %}
-			<a href="archive.html">Archive</a>
+			<a href="blog">Archive</a>
 			{% if post != POSTLIST|last %} 
-			| <a href="posts/{{ POSTLIST[POSTLIST.index(post) + 1].path }}">Prev Post »</a>
+			| <a href="blog/{{ POSTLIST[POSTLIST.index(post) + 1].path }}">Prev Post »</a>
 			{% endif %}
 		</nav>
 {% endblock %}

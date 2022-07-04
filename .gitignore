@@ -1,2 +1,4 @@
 _lilylab/*.html
-_lilylab/posts/*.html
+_lilylab/about/*.html
+_lilylab/blog/*.html
+_lilylab/games/*.html

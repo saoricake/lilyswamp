@@ -6,18 +6,19 @@
 {% block baseurl %}..{% endblock %}
 
 {% block pagecontent %}
-		<article>
-			<header id="postHeader">
-				<h1 id="postTitle">{{ post.title }}</h1>
-				<span id="postDetails">
-					posted on <time datetime="{{ post.date }}">{{ post.datestr }}</time> by <address>{{ post.author }}</address>
-				</span>
-			</header>
+	<article>
+		<header>
+			<h1>{{ post.title }}</h1>
+			<span>
+				posted on <time datetime="{{ post.date }}">{{ post.datestr }}</time> by <address>{{ post.author }}</address>
+			</span>
+		</header>
 
+		<div class="main">
 {{ post.main }}
-		</article>
+		</div>
 
-		<nav id="nextPrevLinks">
+		<footer>
 			{% if post != POSTLIST|first %}
 			<a href="blog/{{ POSTLIST[POSTLIST.index(post) - 1].path }}">« Next Post</a> | 
 			{% endif %}
@@ -25,5 +26,6 @@
 			{% if post != POSTLIST|last %} 
 			| <a href="blog/{{ POSTLIST[POSTLIST.index(post) + 1].path }}">Prev Post »</a>
 			{% endif %}
-		</nav>
+		</footer>
+	</article>
 {% endblock %}

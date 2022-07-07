@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<meta
@@ -17,7 +18,7 @@
 	<base href="{% block baseurl %}.{% endblock %}">
 	<link
 		rel="icon"
-		href="css/favicon.png"
+		href="css/img/favicon.png"
 		type="image/x-icon"/>
 	<link
 		rel="stylesheet"
@@ -26,25 +27,18 @@
 </head>
 
 <body>
-	<header id="siteHeader">
-		<nav>
-			<a href="">Home</a>
-			<a href="games">Games</a>
-			<a href="blog">Blog</a>
-			<a href="about">About</a>
-			<a href="https://twitter.com/proflilyvn">
-				<img src="css/twit.png">
-			</a>
-		</nav>
+	<header class="siteheader">
+		<h1>Lily Lab</h1>
 	</header>
 
-	<main>
-		{% block pagecontent %}
-		{% endblock %}
-	</main>
+	{% include "_aside.html" %}
 
-	<footer id="siteFooter">
+	{% block pagecontent %}
+	{% endblock %}
+
+	<footer class="sitefooter">
 		Lily Lab is maintained by <a href="about">Prof. Lily and her team</a>, and hosted by <a href="https://neocities.org">Neocities</a>.
 	</footer>
 </body>
+
 </html>

@@ -1,0 +1,39 @@
+		<aside class="sitemenu">
+			<nav>
+				<h2>Navigation</h2>
+				<ul role="list">
+					<li>
+						<a href="">Home</a>
+					</li>
+					<li>
+						<a href="about">About Us</a>
+					</li>
+					<li>
+						<a href="https://proflilyvn.itch.io" target="_blank">Itch</a>
+					</li>
+					<li>
+						<a href="https://twitter.com/proflilyvn" target="_blank">Twitter</a>
+					</li>
+				</ul>
+			</nav>
+
+			<nav>
+				<a href="games"><h2>Games</h2></a>
+				<ul role="list">
+					<li>
+						<a href="https://proflilyvn.itch.io/gft" target="_blank">I Became Gay from Translating My New Roommate's Short Story</a>
+					</li>
+				</ul>
+			</nav>
+
+			<nav>
+				<a href="blog"><h2>Blog</h2></a>
+				<ul role="list">
+					{% for post in POSTLIST[:5] %}
+					<li>
+						<a href="blog/{{ post.path }}">{{ post.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</nav>
+		</aside>

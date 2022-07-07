@@ -1,4 +1,14 @@
-/* Don't worry about this */
+@font-face {
+	font-family: "Quicksand";
+	src: url("fonts/Quicksand-Medium.ttf") format("truetype");
+	font-weight: normal;
+}
+@font-face {
+	font-family: "Quicksand";
+	src: url("fonts/Quicksand-Bold.ttf") format("truetype");
+	font-weight: bold;
+}
+
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -6,131 +16,157 @@
 }
 
 :root {
-	background-image: url("./background.png");
+	background-image: url("img/bg.png");
 		background-attachment: fixed;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Quicksand", sans-serif;
 		font-size: 16px;
 		color: #222222;
 }
 
 body {
+	display: grid;
+		grid-template:
+			[row1-start] "head head" max-content [row1-end]
+			[row2-start] "menu main" max-content [row2-end]
+			[row3-start] "foot foot" max-content [row3-end]
+			/ 5fr 17fr;
+		gap: 1rem;
+	box-sizing: content-box;
 	background-color: transparent;
-	width: min(850px, 90%);
-	margin: 0.5rem auto 2rem;
+	max-width: 1100px;
+	padding: 0 1rem;
+	margin: 0.75rem auto 4rem;
 }
 
-header#siteHeader {
+a:link {
+	color: #DD4A4A;
+	text-decoration-line: none;
+}
+a:visited {
+	color: #DD4A4A;
+}
+a:hover {
+	text-decoration-line: underline;
+}
+address {
+	display: inline;
+	font-style: normal;
+}
+
+.siteheader {
+	grid-area: head;
+	padding-left: 1rem;
+	font-size: 1.25rem;
+}
+
+.sitemenu {
+	grid-area: menu;
+	font-size: 0.9rem;
+}
+.sitemenu nav {
+	border-bottom: 1px solid #D8D8D8;
+	margin-bottom: 1.25rem;
+}
+.sitemenu nav > a {
+	text-decoration-line: none;
+}
+.sitemenu h2 {
 	background-color: #222222;
-	padding: 1.25rem 5%;
-	border-radius: 0.6rem 0.6rem 0 0;
-}
-header#siteHeader nav {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	column-gap: 2rem;
-}
-header#siteHeader a {
-	font-size: 1.3rem;
+	padding: 5px 10px;
+	border-left: 6px solid #DD4A4A;
+	border-radius: 2px;
 	color: #FFFFFF;
-	text-decoration: none;
+	font-weight: normal;
+	font-size: 1.125rem;
 }
-header#siteHeader a:hover {
-	text-decoration: underline;
+.sitemenu ul {
+	margin: 0.75rem 1rem 1rem 2rem;
 }
-header#siteHeader img {
-	width: 1.5rem;
+.sitemenu li {
+	margin: 0.3rem 0;
 }
 
+.sitefooter {
+	grid-area: foot;
+	font-size: 0.875rem;
+	text-align: right;
+}
 
-main {
+main, article {
+	grid-area: main;
 	background-color: #FFFFFF;
-	padding: 2rem 5%;
-	border: 1px solid #222222;
+	border-left: 6px solid #DD4A4A;
+	border-radius: 2px;
 }
-main h1 {
+main {
+	padding: 2rem 5%;
+}
+article {
+	padding: 0 5%;
+}
+
+article header {
+	padding: 3rem 0;
+}
+article header h1 {
+	margin-bottom: 0.9rem;
+	font-size: 2rem;
+}
+article header time,
+article header address {
+	font-weight: bold;
+}
+article footer {
+	padding: 2rem 0;
+	text-align: center;
+}
+article .main {
+	padding: 2rem 0;
+	border-top: 1px solid #D8D8D8;
+	border-bottom: 1px solid #D8D8D8;
+}
+
+.main h1 {
 	margin-bottom: 1.3rem;
 	font-size: 2rem;
 }
-main h2 {
+.main h2 {
 	margin: 1.2rem 0;
 	font-size: 1.5rem;
 }
-main p {
-	margin: 1rem 0;
+.main p {
+	margin: 1.5rem 0;
+	text-align: justify;
 	line-height: 1.6rem;
 }
-main p.center {
+.main .center {
+	margin: 2rem 0;
 	text-align: center;
 }
-main a:hover {
-	background-color: #C9F1FE;
+.main ul {
+	margin: 1rem 0;
+	padding-left: 2.5rem;
 }
-main img {
+.main li {
+	line-height: 1.6rem;
+}
+.main img {
 	height: auto;
 	max-width: 100%;
 	margin: 1rem 0;
 }
-main address {
-	display: inline;
-	font-style: normal;
-}
-main iframe {
-	width: 100%;
-}
-main hr {
-	margin: 2.5rem 0;
-}
-
-main #postList {
-	margin-bottom: 1rem;
-}
-main #postList ul {
-	list-style: none;
-}
-main #postList li {
-	font-size: 1.2rem;
-	line-height: 1.9rem;
-}
-main #postList .moreposts {
-	margin-top: 0.2rem;
-	font-size: 1rem;
-}
-main #nextPrevLinks {
-	margin-top: 3rem;
-	text-align: center;
-}
-
-article #postHeader {
-	margin-bottom: 3rem;
-}
-article #postHeader #postTitle {
-	margin-bottom: 0.9rem;
-	font-size: 2rem;
-}
-article #postHeader #postDetails time,
-article #postHeader #postDetails address {
-	font-weight: bold;
-}
-article ul {
-	margin: 1rem 0;
-	padding-left: 2.5rem;
-}
-article li {
-	line-height: 1.6rem;
-}
-article figure {
+.main figure {
 	margin: 2rem 0;
 }
-article blockquote {
+.main blockquote {
 	margin: 1rem 2.5rem;
 }
-
-footer#siteFooter {
-	padding: 0.8rem 0;
-	font-size: 0.8rem;
-	color: #222222;
+.main figcaption {
+	line-height: 1.6rem;
 }
-footer#siteFooter a:hover {
-	background-color: #C9F1FE;
+.main hr {
+	margin: 2.5rem 0;
+}
+.main iframe {
+	width: 100%;
 }

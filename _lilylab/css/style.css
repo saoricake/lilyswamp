@@ -26,9 +26,9 @@
 body {
 	display: grid;
 		grid-template:
-			[row1-start] "head head" max-content [row1-end]
-			[row2-start] "menu main" max-content [row2-end]
-			[row3-start] "foot foot" max-content [row3-end]
+			"head head" max-content
+			"menu main" max-content
+			"foot foot" max-content
 			/ 5fr 17fr;
 		gap: 1rem;
 	box-sizing: content-box;
@@ -60,12 +60,14 @@ address {
 }
 
 .sitemenu {
+	display: grid;
+		align-content: start;
+		gap: 1rem;
 	grid-area: menu;
-	font-size: 0.9rem;
+	height: max-content;
 }
 .sitemenu nav {
 	border-bottom: 1px solid #D8D8D8;
-	margin-bottom: 1.25rem;
 }
 .sitemenu nav > a {
 	text-decoration-line: none;
@@ -79,8 +81,12 @@ address {
 	font-weight: normal;
 	font-size: 1.125rem;
 }
+.sitemenu nav:first-of-type h2 {
+	border-left-color: #222222;
+}
 .sitemenu ul {
 	margin: 0.75rem 1rem 1rem 2rem;
+	font-size: 0.9rem;
 }
 .sitemenu li {
 	margin: 0.3rem 0;
@@ -169,4 +175,24 @@ article .main {
 }
 .main iframe {
 	width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+	body {
+		display: grid;
+			grid-template:
+				"head" max-content
+				"main" max-content
+				"menu" max-content
+				"foot" max-content
+				/ 1fr;
+	}
+
+	.sitemenu {
+		grid-template-columns: repeat(3, 1fr);
+		border-bottom: 1px solid #D8D8D8;
+	}
+	.sitemenu nav {
+		border-bottom: none;
+	}
 }

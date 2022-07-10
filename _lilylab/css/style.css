@@ -26,16 +26,31 @@
 body {
 	display: grid;
 		grid-template:
-			"head head" max-content
-			"menu main" max-content
-			"foot foot" max-content
-			/ 5fr 17fr;
+			"hd hd hd" max-content
+			"a1 mn a2" max-content
+			".. ft .." max-content
+			/ 200px 1fr 250px;
 		gap: 1rem;
 	box-sizing: content-box;
 	background-color: transparent;
-	max-width: 1100px;
+	max-width: 100%;
 	padding: 0 1rem;
 	margin: 0.75rem auto 4rem;
+}
+body > header {
+	grid-area: hd;
+}
+body > aside:first-of-type {
+	grid-area: a1;
+}
+body > aside:last-of-type {
+	grid-area: a2;
+}
+body > footer {
+	grid-area: ft;
+}
+body > :is(main, article) {
+	grid-area: mn;
 }
 
 a:link {
@@ -53,53 +68,49 @@ address {
 	font-style: normal;
 }
 
-.siteheader {
-	grid-area: head;
+body > header {
 	padding-left: 1rem;
 	font-size: 1.25rem;
 }
 
-.sitemenu {
+body > aside {
 	display: grid;
 		align-content: start;
 		gap: 1rem;
-	grid-area: menu;
 	height: max-content;
 }
-.sitemenu nav {
+body > aside nav {
 	border-bottom: 1px solid #D8D8D8;
 }
-.sitemenu nav > a {
-	text-decoration-line: none;
-}
-.sitemenu h2 {
+body > aside h2 {
 	background-color: #222222;
 	padding: 5px 10px;
-	border-left: 6px solid #DD4A4A;
+	border-left: 6px solid #222222;
 	border-radius: 2px;
 	color: #FFFFFF;
 	font-weight: normal;
 	font-size: 1.125rem;
 }
-.sitemenu nav:first-of-type h2 {
-	border-left-color: #222222;
+body > aside nav > a:hover {
+	text-decoration-line: none;
 }
-.sitemenu ul {
+body > aside nav > a > h2 {
+	border-left-color: #DD4A4A;
+}
+body > aside ul {
 	margin: 0.75rem 1rem 1rem 2rem;
 	font-size: 0.9rem;
 }
-.sitemenu li {
+body > aside li {
 	margin: 0.3rem 0;
 }
 
-.sitefooter {
-	grid-area: foot;
+body > footer {
 	font-size: 0.875rem;
 	text-align: right;
 }
 
 main, article {
-	grid-area: main;
 	background-color: #FFFFFF;
 	border-left: 6px solid #DD4A4A;
 	border-radius: 2px;
@@ -161,14 +172,25 @@ article .main {
 	max-width: 100%;
 	margin: 1rem 0;
 }
-.main figure {
-	margin: 2rem 0;
-}
 .main blockquote {
 	margin: 1rem 2.5rem;
 }
-.main figcaption {
+.main figure.quote {
+	margin: 2rem 0;
+}
+.main figure.quote figcaption {
 	line-height: 1.6rem;
+}
+.main figure.image {
+	margin: 3rem 0;
+}
+.main figure.image img {
+	margin: 0;
+}
+.main figure.image figcaption {
+	margin-top: 0.4rem;
+	font-size: 0.9rem;
+	text-align: center;
 }
 .main hr {
 	margin: 2.5rem 0;
@@ -178,21 +200,5 @@ article .main {
 }
 
 @media screen and (max-width: 900px) {
-	body {
-		display: grid;
-			grid-template:
-				"head" max-content
-				"main" max-content
-				"menu" max-content
-				"foot" max-content
-				/ 1fr;
-	}
-
-	.sitemenu {
-		grid-template-columns: repeat(3, 1fr);
-		border-bottom: 1px solid #D8D8D8;
-	}
-	.sitemenu nav {
-		border-bottom: none;
-	}
+	
 }

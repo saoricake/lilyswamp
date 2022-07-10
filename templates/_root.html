@@ -27,16 +27,17 @@
 </head>
 
 <body>
-	<header class="siteheader">
+	<header>
 		<h1>Lily Lab</h1>
 	</header>
-
-	{% include "_aside.html" %}
 
 	{% block pagecontent %}
 	{% endblock %}
 
-	<footer class="sitefooter">
+	{% include "_asidenav.html" %}
+	{% include "_asidelist.html" %}
+
+	<footer>
 		Lily Lab is maintained by <a href="about">Prof. Lily and her team</a>, and hosted by <a href="https://neocities.org">Neocities</a>.
 	</footer>
 </body>

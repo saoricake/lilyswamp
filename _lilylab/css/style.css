@@ -216,7 +216,6 @@ article .main {
 			gap: 0;
 		place-self: end;
 		height: 100%;
-		min-width: max-content;
 	}
 	body > aside:first-of-type nav {
 		border-bottom: none;
@@ -239,5 +238,33 @@ article .main {
 	body > aside:last-of-type {
 		display: grid;
 			grid-template-columns: 2fr 3fr;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	body {
+		grid-template:
+			"hd" max-content
+			"a1" max-content
+			"mn" max-content
+			"a2" max-content
+			"ft" max-content
+			/ 1fr;
+	}
+
+	body > aside:first-of-type {
+		display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			row-gap: 0.3rem;
+		place-self: unset;
+	}
+	body > aside:first-of-type nav:first-of-type {
+		
+	}
+
+	body > aside:last-of-type {
+		grid-template-columns: 1fr;
+		grid-template-rows: max-content max-content;
 	}
 }

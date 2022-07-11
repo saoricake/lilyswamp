@@ -200,5 +200,44 @@ article .main {
 }
 
 @media screen and (max-width: 900px) {
-	
+	body {
+		grid-template:
+			"hd a1" max-content
+			"mn mn" max-content
+			"a2 a2" max-content
+			"ft ft" max-content
+			/ max-content 1fr;
+	}
+
+	body > aside:first-of-type {
+		display: grid;
+			grid-template-rows: 1fr 1fr;
+			place-items: end;
+			gap: 0;
+		place-self: end;
+		height: 100%;
+		min-width: max-content;
+	}
+	body > aside:first-of-type nav {
+		border-bottom: none;
+	}
+	body > aside:first-of-type nav:first-of-type {
+		grid-row: 2 / 3;
+	}
+	body > aside:first-of-type h2 {
+		display: none;
+	}
+	body > aside:first-of-type ul {
+		margin: 0;
+		font-size: 1rem;
+	}
+	body > aside:first-of-type li {
+		display: inline;
+		margin: 0 0.5rem;
+	}
+
+	body > aside:last-of-type {
+		display: grid;
+			grid-template-columns: 2fr 3fr;
+	}
 }

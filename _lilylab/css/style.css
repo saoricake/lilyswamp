@@ -112,14 +112,13 @@ body > footer {
 
 main, article {
 	background-color: #FFFFFF;
+	padding: 0 min(6%, 2.5rem);
 	border-left: 6px solid #DD4A4A;
 	border-radius: 2px;
 }
 main {
-	padding: 2rem 2.5rem;
-}
-article {
-	padding: 0 2.5rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 article header {

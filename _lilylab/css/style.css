@@ -29,11 +29,11 @@ body {
 			"hd hd hd" max-content
 			"a1 mn a2" max-content
 			".. ft .." max-content
-			/ 200px 1fr 250px;
+			/ minmax(170px, 1fr) 4fr 250px;
 		gap: 1rem;
-	box-sizing: content-box;
 	background-color: transparent;
-	max-width: 100%;
+	width: 100%;
+	max-width: 1300px;
 	padding: 0 1rem;
 	margin: 0.75rem auto 4rem;
 }
@@ -208,40 +208,14 @@ article .main {
 	margin-bottom: 0 !important;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1069px) {
 	body {
 		grid-template:
-			"hd a1" max-content
-			"mn mn" max-content
+			"hd hd" max-content
+			"a1 mn" max-content
 			"a2 a2" max-content
 			"ft ft" max-content
-			/ max-content 1fr;
-	}
-
-	body > aside:first-of-type {
-		display: grid;
-			grid-template-rows: 1fr 1fr;
-			place-items: end;
-			gap: 0;
-		place-self: end;
-		height: 100%;
-	}
-	body > aside:first-of-type nav {
-		border-bottom: none;
-	}
-	body > aside:first-of-type nav:first-of-type {
-		grid-row: 2 / 3;
-	}
-	body > aside:first-of-type h2 {
-		display: none;
-	}
-	body > aside:first-of-type ul {
-		margin: 0;
-		font-size: 1rem;
-	}
-	body > aside:first-of-type li {
-		display: inline;
-		margin: 0 0.5rem;
+			/ minmax(170px, 1fr) 4fr;
 	}
 
 	body > aside:last-of-type {
@@ -250,7 +224,7 @@ article .main {
 	}
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 803px) {
 	body {
 		grid-template:
 			"hd" max-content
@@ -268,8 +242,19 @@ article .main {
 			row-gap: 0.3rem;
 		place-self: unset;
 	}
-	body > aside:first-of-type nav:first-of-type {
-		
+	body > aside:first-of-type nav {
+		border-bottom: none;
+	}
+	body > aside:first-of-type h2 {
+		display: none;
+	}
+	body > aside:first-of-type ul {
+		margin: 0;
+		font-size: 1rem;
+	}
+	body > aside:first-of-type li {
+		display: inline;
+		margin: 0 0.5rem;
 	}
 
 	body > aside:last-of-type {

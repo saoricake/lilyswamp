@@ -4,14 +4,14 @@
 {% block baseurl %}..{% endblock %}
 
 {% block maincontent %}
-		<nav id="postList">
+		<nav class="blogarchive">
 			<h1>Blog</h1>
 			<ul>
 				{% for post in POSTLIST[:5] %}
 				<li>
-					<a href="blog/{{ post.path }}">
-						<time datetime="{{ post.date }}">{{ post.date }}</time> » {{ post.title }}
-					</a>
+					<time datetime="{{ post.date }}">{{ post.date }}</time>
+					<span>{{ post.author }}</span>
+					<a href="blog/{{ post.path }}">{{ post.title }}</a>
 				</li>
 				{% endfor %}
 			</ul>

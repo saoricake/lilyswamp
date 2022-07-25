@@ -10,42 +10,32 @@ env = Environment(
 	loader=FileSystemLoader("templates")
 )
 
-pages = env.list_templates(filter_func=lambda t: t[0] != "_")
-
-def listposts(postdir: str = "posts") -> list[dict]:
-	def parsepostdata(postline: str) -> str:
-		return search("(?<=: ).*", postline).group()
-
-	returnlist = []
-
-	for post in listdir(postdir):
-		with open(f"{postdir}/{post}", encoding="utf8") as openpost:
-			postdict = {}
-
-			postdict["path"] = post
-			postdict["title"] = parsepostdata(openpost.readline())
-			postdict["date"] = parsepostdata(openpost.readline())
-			postdict["datestr"] = date.fromisoformat(postdict["date"]).strftime("%b %d, %Y")
-			postdict["author"] = parsepostdata(openpost.readline())
-			postdict["category"] = parsepostdata(openpost.readline())
+class Post:
+	def __init__(self, path: str):
+		with open(f"posts/{path}", encoding="utf8") as openpost:
+			self.path = path
+			self.title = search("(?<=: ).*", openpost.readline()).group()
+			self.date = search("(?<=: ).*", openpost.readline()).group()
+			self.datestr = date.fromisoformat(self.date).strftime("%b %d, %Y")
+			self.author = search("(?<=: ).*", openpost.readline()).group()
+			self.category = search("(?<=: ).*", openpost.readline()).group()
 			openpost.readline()
-			postdict["main"] = openpost.read()
+			self.main = openpost.read()
+	
+	def __repr__(self):
+		return f"{self.title} by {self.author} on {self.date}"
 
-			returnlist.insert(0, postdict)
-
-	returnlist.pop()
-	return returnlist
-
-posts = listposts()
+posts = [Post(p) for p in listdir("posts") if "Post-Template" not in p]
+posts.reverse()
 
 env.globals = {
 	"POSTLIST": posts
 }
 
-for page in pages:
+for page in (t for t in env.list_templates() if t[0] != "_"):
 	with open(f"_lilylab/{page}", "w", encoding="utf8") as output:
 		output.write(env.get_template(page).render())
 
 for post in posts:
-	with open(f"_lilylab/blog/{post['path']}", "w", encoding="utf8") as output:
+	with open(f"_lilylab/blog/{post.path}", "w", encoding="utf8") as output:
 		output.write(env.get_template("_article.html").render(post=post))

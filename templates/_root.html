@@ -15,7 +15,11 @@
 		name="description"
 		content="{% block pagedesc %}Prof. Lily's online homepage.{% endblock %}">
 
+	{% if ROOTURL %}
+	<base href="{{ ROOTURL }}">
+	{% else %}
 	<base href="{% block baseurl %}.{% endblock %}">
+	{% endif %}
 	<link
 		rel="icon"
 		href="css/img/favicon.png"

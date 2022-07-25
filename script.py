@@ -29,7 +29,8 @@ posts = [Post(p) for p in listdir("posts") if "Post-Template" not in p]
 posts.reverse()
 
 env.globals = {
-	"POSTLIST": posts
+	"POSTLIST": posts,
+	# "ROOTURL": "https://proflily.games/"
 }
 
 for page in (t for t in env.list_templates() if t[0] != "_"):

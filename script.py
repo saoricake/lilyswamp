@@ -23,10 +23,10 @@ class Post:
 			self.main = openpost.read()
 	
 	def __repr__(self):
-		return f"{self.title} by {self.author} on {self.date}"
+		return f"{self.date} - {self.author:6} - {self.title}"
 
-posts = [Post(p) for p in listdir("posts") if "Post-Template" not in p]
-posts.reverse()
+posts = [Post(p) for p in listdir("posts")[::-1] if "Post-Template" not in p]
+# for p in posts: print(p)
 
 env.globals = {
 	"POSTLIST": posts,

@@ -7,7 +7,7 @@
 		<nav class="blogarchive">
 			<h1>Blog</h1>
 			<ul>
-				{% for post in POSTLIST[:5] %}
+				{% for post in POSTLIST %}
 				<li>
 					<time datetime="{{ post.date }}">{{ post.date }}</time>
 					<span>{{ post.author }}</span>
